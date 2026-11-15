@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Asistente virtual de viajes Casa Andina">
+  <title>Casa Andina | Asistente de viajes</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='25,20 75,20 95,80 5,80' fill='%23050505'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="assistant-card" aria-label="Asistente virtual Casa Andina">
+      <header class="topbar">
+        <button class="icon-button back-arrow" id="header-back" aria-label="Regresar" hidden>←</button>
+        <div class="brand">
+          <span class="brand-symbol" aria-hidden="true"></span>
+          <span class="brand-copy"><strong>casa andina</strong><small>Hoteles</small></span>
+        </div>
+        <button class="icon-button menu-button" aria-label="Más opciones">⋮</button>
+      </header>
+
+      <div class="progress-area">
+        <div class="progress-meta"><span id="step-name">Bienvenida</span><span id="step-number">Paso 1 de 10</span></div>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      </div>
+
+      <div class="step-viewport">
+        <!-- 1. BIENVENIDA -->
+        <section class="step active welcome-step" id="step-1">
+          <div class="welcome-logo"><span class="brand-symbol big"></span><strong>CASA ANDINA</strong><small>HOTELES</small></div>
+          <div class="chat-bubble welcome-bubble">¡Hola! Soy tu asistente de viajes de Casa Andina. Te ayudo a elegir un hotel en pocos minutos.</div>
+          <button class="primary-btn wide" id="start-button">Comenzar</button>
+          <button class="outline-btn wide" id="human-button">Hablar con una persona</button>
+          <p class="tiny-note">¡Toma menos de 2 minutos!</p>
+        </section>
+
+        <!-- 2. DESTINO -->
+        <section class="step" id="step-2">
+          <div class="chat-bubble">¿A dónde quieres viajar?</div>
+          <div class="destination-grid">
+            <button class="destination-card selected" data-destination="Cusco">
+              <img src="imagenes/cusco.jpg" alt="Paisaje de Cusco">
+              <span>Cusco</span><i>✓</i>
+            </button>
+            <button class="destination-card" data-destination="Arequipa">
+              <img src="imagenes/images (4).jpg" alt="Paisaje de Arequipa">
+              <span>Arequipa</span><i>✓</i>
+            </button>
+            <button class="destination-card" data-destination="Cajamarca">
+              <img src="imagenes/cajamarca.jpg"Paisaje natural">
+              <span>Cajamarca</span><i>✓</i>
+            </button>
+            <button class="destination-card" data-destination="Tumbes">
+              <img src="imagenes/tumbes.jpg" alt="Playa tropical">
+              <span>Tumbes</span><i>✓</i>
+            </button>
+          </div>
+          <button class="outline-btn wide other-destination" id="other-destination">+ Otros destinos</button>
+          <div class="inline-entry"><input id="destination-input" type="text" placeholder="Escriba un destino"><button class="round-send" id="destination-next" aria-label="Continuar">➜</button></div>
+        </section>
+
+        <!-- 3. FECHAS Y HUESPEDES -->
+        <section class="step" id="step-3">
+          <div class="chat-bubble">¿Cuándo viajas y cuántas personas?</div>
+          <div class="date-grid">
+            <label class="field-card">Llegada<input type="date" id="arrival-date"></label>
+            <label class="field-card">Salida<input type="date" id="departure-date"></label>
+          </div>
+          <div class="counter-list">
+            <div class="counter-row"><span>Adultos</span><div class="counter"><button data-counter="adults" data-change="-1">−</button><output id="adults-value">2</output><button data-counter="adults" data-change="1">+</button></div></div>
+            <div class="counter-row"><span>Niños</span><div class="counter"><button data-counter="children" data-change="-1">−</button><output id="children-value">0</output><button data-counter="children" data-change="1">+</button></div></div>
+          </div>
+          <button class="primary-btn wide next-step">Continuar</button>
+        </section>
+
+        <!-- 4. MOTIVO -->
+        <section class="step" id="step-4">
+          <div class="chat-bubble">¿Cuál es el motivo de tu viaje?</div>
+          <div class="choice-list">
+            <label class="check-option"><input type="radio" name="trip-reason" value="Vacaciones"><span>Vacaciones</span></label>
+            <label class="check-option"><input type="radio" name="trip-reason" value="Trabajo"><span>Trabajo</span></label>
+            <label class="check-option"><input type="radio" name="trip-reason" value="Viaje romántico" checked><span>Viaje romántico</span></label>
+            <label class="check-option"><input type="radio" name="trip-reason" value="Viaje familiar"><span>Viaje familiar</span></label>
+            <label class="check-option"><input type="radio" name="trip-reason" value="Turismo"><span>Turismo</span></label>
+          </div>
+          <button class="primary-btn wide next-step">Continuar</button>
+        </section>
+
+        <!-- 5. PRESUPUESTO Y HABITACION -->
+        <section class="step" id="step-5">
+          <div class="chat-bubble">¿Cuál es tu presupuesto por noche?</div>
+          <div class="budget-head"><strong id="budget-value">S/200 – S/350</strong></div>
+          <input class="range-input" id="budget-range" type="range" min="100" max="600" value="350" step="25">
+          <div class="range-labels"><span>S/100</span><span>S/600+</span></div>
+          <div class="chat-bubble compact">¿Qué habitación prefieres?</div>
+          <div class="room-choice-grid">
+            <label><input type="radio" name="room-type" value="Individual"><span>Individual</span></label>
+            <label><input type="radio" name="room-type" value="Matrimonial" checked><span>Matrimonial</span></label>
+            <label><input type="radio" name="room-type" value="Doble"><span>Doble</span></label>
+            <label><input type="radio" name="room-type" value="Familiar"><span>Familiar</span></label>
+          </div>
+          <button class="primary-btn wide next-step">Continuar</button>
+        </section>
+
+        <!-- 6. ACTIVIDADES -->
+        <section class="step" id="step-6">
+          <div class="chat-bubble compact dark-bubble" id="selected-summary">S/200 - 350 · Matrimonial</div>
+          <div class="chat-bubble">¿Qué actividades te gustaría hacer?</div>
+          <div class="activity-grid">
+            <label class="pill-option"><input type="checkbox" value="Turismo cultural"><span>Turismo cultural</span></label>
+            <label class="pill-option"><input type="checkbox" value="Gastronomía" checked><span>Gastronomía</span></label>
+            <label class="pill-option"><input type="checkbox" value="Relajación"><span>Relajación</span></label>
+            <label class="pill-option"><input type="checkbox" value="Romántica" checked><span>Romántica</span></label>
+          </div>
+          <div class="button-pair">
+            <button class="outline-btn" id="skip-activities">Omitir</button>
+            <button class="primary-btn" id="show-hotels">Ver hoteles</button>
+          </div>
+        </section>
+
+        <!-- 7. RECOMENDACION -->
+        <section class="step" id="step-7">
+          <div class="chat-bubble">Mira estas opciones:</div>
+          <div class="hotel-list">
+            <article class="hotel-card">
+              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80" alt="Hotel con piscina">
+              <div><strong>Premium Cusco</strong><p><b>S/280</b> / noche</p><small>Para parejas</small></div>
+              <span class="hotel-check">✓</span>
+            </article>
+            <article class="hotel-card">
+              <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=500&q=80" alt="Hotel en el valle">
+              <div><strong>Valle Sagrado</strong><p><b>S/340</b> / noche</p><small>Con spa</small></div>
+            </article>
+          </div>
+          <button class="outline-btn wide" id="more-hotels">Ver más opciones</button>
+          <button class="primary-btn wide next-step">Ver recomendación</button>
+        </section>
+
+        <!-- 8. DETALLE Y COMPARACION -->
+        <section class="step" id="step-8">
+          <div class="detail-heading"><span>Premium Cusco</span><strong>★ 4.8</strong></div>
+          <img class="hotel-hero" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=85" alt="Hotel Premium Cusco">
+          <div class="tab-switch" role="group" aria-label="Tipo de habitación">
+            <button class="active" data-room-tab="Matrimonial">Matrimonial</button>
+            <button data-room-tab="Doble">Doble</button>
+          </div>
+          <div class="room-details">
+            <strong id="room-price">S/280 por noche</strong>
+            <ul><li>Desayuno por noche</li><li>Wi-Fi</li><li>Vista a la ciudad</li></ul>
+            <p>35 m² · 1 cama king</p>
+            <small>Cerca: Plaza de Armas, 5 min</small>
+          </div>
+          <button class="primary-btn wide next-step">Elegir habitación</button>
+        </section>
+
+        <!-- 9. SERVICIOS EXTRA -->
+        <section class="step" id="step-9">
+          <div class="chat-bubble">¿Quieres agregar algo especial a tu reserva?</div>
+          <div class="extra-list">
+            <label class="extra-option"><span><input type="checkbox" data-extra="Desayuno" data-price="35"> Desayuno</span><b>S/35</b></label>
+            <label class="extra-option"><span><input type="checkbox" data-extra="Traslado" data-price="60"> Traslado</span><b>S/60</b></label>
+            <label class="extra-option"><span><input type="checkbox" data-extra="Cena especial" data-price="120" checked> Cena especial</span><b>S/120</b></label>
+            <label class="extra-option"><span><input type="checkbox" data-extra="Decoración" data-price="90" checked> Decoración</span><b>S/90</b></label>
+            <label class="extra-option"><span><input type="checkbox" data-extra="Cumpleaños" data-price="80"> Cumpleaños</span><b>S/80</b></label>
+          </div>
+          <div class="extras-total">Total extras <strong id="extras-total">S/210</strong></div>
+          <button class="primary-btn wide next-step">Continuar</button>
+        </section>
+
+        <!-- 10. RESUMEN Y CONFIRMACION -->
+        <section class="step" id="step-10">
+          <div class="chat-bubble compact">Revisa tu reserva:</div>
+          <div class="booking-summary">
+            <div><span>Hotel</span><strong>Premium Cusco</strong></div>
+            <div><span>Habitación</span><strong id="summary-room">Matrimonial</strong></div>
+            <div><span>Fechas</span><strong id="summary-dates">Por confirmar</strong></div>
+            <div><span>Huéspedes</span><strong id="summary-guests">2 adultos</strong></div>
+            <div><span>Extras</span><strong id="summary-extras">S/210</strong></div>
+            <hr>
+            <div class="summary-total"><span>Total estimado</span><strong id="grand-total">S/1,050</strong></div>
+          </div>
+          <form id="booking-form" class="booking-form">
+            <input type="text" id="full-name" placeholder="Nombre completo" required>
+            <input type="email" id="email" placeholder="Correo electrónico" required>
+            <label class="secure-note"><input type="checkbox" required> Pago seguro y aceptación de condiciones</label>
+            <button class="primary-btn wide" type="submit">Continuar</button>
+          </form>
+          <button class="text-button" id="modify-booking">Modificar reserva</button>
+        </section>
+
+        <!-- CONFIRMACION FINAL (resultado dentro del mismo flujo) -->
+        <section class="step" id="step-success">
+          <div class="success-icon">✓</div>
+          <h2>¡Solicitud recibida!</h2>
+          <p class="success-copy">Gracias por elegir Casa Andina. Tu selección está lista para continuar con el proceso de pago seguro.</p>
+          <div class="confirmation-code">Código de solicitud <strong>CA-2026-001</strong></div>
+          <button class="primary-btn wide" id="restart-button">Volver al inicio</button>
+        </section>
+      </div>
+
+      <footer class="bottom-bar">
+        <button class="back-text" id="footer-back" hidden>← Atrás</button>
+        <div class="message-box"><input type="text" id="chat-input" placeholder="Escriba un mensaje"><button id="chat-send" aria-label="Enviar mensaje">➜</button></div>
+      </footer>
+
+      <div class="loading-overlay" id="loading-overlay" aria-hidden="true">
+        <div class="spinner"></div><p id="loading-message">Preparando el siguiente paso...</p>
+      </div>
+      <div class="toast" id="toast" role="status"></div>
+    </section>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+</html>

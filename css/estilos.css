@@ -1,0 +1,128 @@
+*{box-sizing:border-box}
+:root{--black:#090909;--gray:#777;--line:#e7e7e7;--soft:#f1f1f1;--green:#20a35a}
+body{margin:0;min-height:100vh;background:#f2f2f2;color:#111;font-family:Inter,Arial,sans-serif;display:grid;place-items:center;padding:24px}
+button,input{font:inherit}
+button{cursor:pointer}
+.app-shell{width:100%;display:flex;justify-content:center}
+.assistant-card{width:min(100%,470px);height:min(900px,calc(100vh - 48px));min-height:650px;background:#fff;border:1px solid #e5e5e5;border-radius:18px;box-shadow:0 18px 55px #00000012;display:flex;flex-direction:column;position:relative;overflow:hidden;padding:20px 25px 15px}
+.topbar{height:42px;display:grid;grid-template-columns:35px 1fr 35px;align-items:center;border-bottom:1px solid #eee;flex-shrink:0}
+.brand{display:flex;align-items:center;justify-content:center;gap:8px}
+.brand-symbol{width:19px;height:23px;background:#050505;clip-path: polygon(25% 0, 75% 0, 100% 100%, 0 100%);display:inline-block}
+.brand-copy{display:flex;flex-direction:column;line-height:1.05}
+.brand-copy strong{font-size:12px;font-weight:600}
+.brand-copy small{font-size:7px;text-align:center}
+.icon-button{border:0;background:transparent;font-size:23px;color:#222;padding:3px}
+.back-arrow{font-size:22px}
+.progress-area{padding:10px 0 12px;flex-shrink:0}
+.progress-meta{display:flex;justify-content:space-between;color:#777;font-size:9px}
+.progress-track{height:3px;background:#ededed;margin-top:8px;border-radius:10px;overflow:hidden}
+.progress-fill{height:100%;width:10%;background:#111;transition:width .3s}
+.step-viewport{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;scrollbar-width:thin;scrollbar-color:#ddd transparent}
+.step{display:none;flex-direction:column;align-items:stretch;width:100%;max-width:380px;margin:0 auto;padding:8px 0 18px;animation:fadeUp .28s ease}
+.step.active{display:flex}
+.welcome-step{justify-content:center;align-items:center;flex:1}
+.welcome-logo{display:flex;flex-direction:column;align-items:center;margin:25px 0 38px}
+.brand-symbol.big{width:70px;height:83px;margin-bottom:9px}
+.welcome-logo strong{font-size:12px}
+.welcome-logo small{font-size:8px;letter-spacing:3px;margin-top:3px}
+.chat-bubble{background:#ededed;border-radius:15px;padding:13px 16px;text-align:center;font-size:12px;line-height:1.45;margin:12px auto 17px;width:88%;color:#292929}
+.welcome-bubble{text-align:left;width:100%;margin-bottom:17px}
+.compact{padding:10px 14px;margin:9px auto 14px}
+.dark-bubble{background:#050505;color:#fff;width:max-content;max-width:100%;border-radius:20px;font-size:10px}
+.primary-btn,.outline-btn{border-radius:22px;min-height:38px;padding:10px 16px;font-size:11px;font-weight:600}
+.primary-btn{background:#050505;color:#fff;border:1px solid #050505}
+.primary-btn:hover{background:#333}
+.outline-btn{background:#fff;color:#111;border:1px solid #aaa}
+.wide{width:100%}
+.welcome-step .outline-btn{margin-top:9px}
+.tiny-note{text-align:center;font-size:9px;color:#777;margin-top:45px}
+.destination-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:4px 0 14px}
+.destination-card{border:1px solid #ddd;background:#fff;border-radius:10px;padding:5px;position:relative;text-align:left;overflow:hidden;color:#111}
+.destination-card img{width:100%;height:90px;object-fit:cover;border-radius:6px;display:block}
+.destination-card span{font-size:11px;display:block;padding:8px 5px 5px}
+.destination-card i{position:absolute;right:9px;top:9px;width:17px;height:17px;background:#fff;border:1px solid #aaa;border-radius:50%;font-size:11px;font-style:normal;text-align:center;line-height:16px;opacity:0}
+.destination-card.selected{border:2px solid #111;padding:4px}
+.destination-card.selected i{opacity:1}
+.other-destination{margin-bottom:12px}
+.inline-entry{display:flex;gap:8px;margin-top:auto}
+.inline-entry input,.message-box input,.booking-form>input{min-width:0;flex:1;border:1px solid #e5e5e5;border-radius:20px;padding:11px 14px;font-size:11px;outline:none}
+.round-send,.message-box button{width:36px;height:36px;border-radius:50%;border:0;background:#111;color:#fff;font-size:18px;flex-shrink:0}
+.date-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 15px}
+.field-card{border:1px solid #e4e4e4;border-radius:10px;padding:10px;font-size:10px;color:#555;display:flex;flex-direction:column;gap:8px}
+.field-card input{width:100%;border:0;font-size:10px;color:#222;outline:none}
+.counter-list{border:1px solid #eee;border-radius:12px;padding:5px 12px;margin-bottom:20px}
+.counter-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;font-size:11px}
+.counter-row+ .counter-row{border-top:1px solid #eee}
+.counter{display:flex;align-items:center;gap:12px}
+.counter button{width:22px;height:22px;border:0;border-radius:50%;background:#eee;font-size:15px}
+.counter output{min-width:12px;text-align:center}
+.choice-list{display:flex;flex-direction:column;gap:7px;margin:3px 0 22px}
+.check-option{border:1px solid #e5e5e5;border-radius:10px;display:flex;align-items:center;gap:10px;padding:9px 12px;font-size:11px}
+.check-option input,.extra-option input{accent-color:#111}
+.budget-head{text-align:center;margin:8px 0 4px;font-size:12px}
+.range-input{width:100%;accent-color:#111;margin:12px 0 3px}
+.range-labels{display:flex;justify-content:space-between;color:#777;font-size:9px;margin-bottom:20px}
+.room-choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:2px 0 20px}
+.room-choice-grid label input{position:absolute;opacity:0}
+.room-choice-grid span{display:block;border:1px solid #e4e4e4;border-radius:9px;padding:10px;text-align:center;font-size:10px}
+.room-choice-grid input:checked+span{border-color:#111;background:#f7f7f7;font-weight:600}
+.activity-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:10px 0 25px}
+.pill-option input{position:absolute;opacity:0}
+.pill-option span{display:block;text-align:center;border:1px solid #ddd;border-radius:18px;padding:9px 5px;font-size:10px}
+.pill-option input:checked+span{border-color:#111;background:#f5f5f5;font-weight:600}
+.button-pair{display:flex;gap:9px;justify-content:center}
+.button-pair>*{flex:1}
+.hotel-list{display:flex;flex-direction:column;gap:12px;margin:8px 0 14px}
+.hotel-card{display:flex;align-items:center;gap:10px;border:1px solid #e7e7e7;border-radius:12px;padding:8px;position:relative}
+.hotel-card img{width:105px;height:76px;object-fit:cover;border-radius:8px}
+.hotel-card strong{font-size:11px}
+.hotel-card p{font-size:10px;margin:6px 0 3px;color:#555}
+.hotel-card small{font-size:9px;color:#777}
+.hotel-check{position:absolute;right:10px;top:9px;background:#eee;border-radius:50%;width:17px;height:17px;text-align:center;font-size:11px}
+.hotel-list+.outline-btn{margin-bottom:9px}
+.detail-heading{display:flex;justify-content:space-between;align-items:center;font-size:11px;margin:8px 0}
+.detail-heading strong{color:#269d4c}
+.hotel-hero{width:100%;height:145px;object-fit:cover;border-radius:10px}
+.tab-switch{display:flex;background:#e5e5e5;border-radius:20px;margin:13px 0}
+.tab-switch button{width:50%;border:0;border-radius:20px;padding:9px;background:transparent;font-size:10px}
+.tab-switch button.active{background:#050505;color:#fff}
+.room-details{font-size:10px;margin:2px 0 15px}
+.room-details ul{padding-left:17px;line-height:1.8;margin:6px 0}
+.room-details li::marker{color:#21a454}
+.room-details p{margin:7px 0 3px;color:#555}
+.room-details small{color:#777}
+.extra-list{display:flex;flex-direction:column;gap:8px;margin:10px 0 14px}
+.extra-option{border:1px solid #e5e5e5;border-radius:9px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;font-size:10px}
+.extra-option span{display:flex;align-items:center;gap:8px}
+.extra-option b{font-weight:500;color:#555}
+.extras-total{display:flex;justify-content:space-between;font-size:10px;margin:6px 0 18px}
+.booking-summary{border:1px solid #e4e4e4;border-radius:10px;padding:12px;margin:5px 0 15px}
+.booking-summary>div{display:flex;justify-content:space-between;gap:10px;font-size:9px;padding:5px 0}
+.booking-summary span{color:#777}
+.booking-summary strong{text-align:right;font-weight:600}
+.booking-summary hr{border:0;border-top:1px solid #eee;margin:7px 0}
+.booking-summary .summary-total{font-size:12px}
+.booking-form{display:flex;flex-direction:column;gap:9px}
+.booking-form>input{width:100%;flex:auto;border-radius:8px}
+.secure-note{font-size:9px;color:#259d56;display:flex;gap:6px;align-items:center}
+.secure-note input{accent-color:#20a35a}
+.text-button,.back-text{border:0;background:transparent;color:#333;text-decoration:underline;font-size:10px;padding:12px}
+.success-icon{width:58px;height:58px;border-radius:50%;background:#e8f7ed;color:#178b45;display:grid;place-items:center;font-size:30px;margin:45px auto 10px}
+.step h2{text-align:center;font-size:20px}
+.success-copy{text-align:center;color:#666;font-size:12px;line-height:1.6}
+.confirmation-code{background:#f5f5f5;border-radius:10px;padding:15px;text-align:center;font-size:11px;margin:15px 0 25px}
+.bottom-bar{padding-top:10px;border-top:1px solid #f0f0f0;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.back-text{white-space:nowrap;text-decoration:none}
+.message-box{display:flex;align-items:center;gap:7px;width:100%}
+.message-box input{border-radius:20px;padding:11px 13px}
+.message-box button{width:34px;height:34px}
+.loading-overlay{position:absolute;inset:0;z-index:10;background:#ffffffed;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;opacity:0;visibility:hidden;transition:.2s}
+.loading-overlay.visible{opacity:1;visibility:visible}
+.loading-overlay p{font-size:11px;color:#555}
+.spinner{width:32px;height:32px;border:3px solid #e6e6e6;border-top-color:#111;border-radius:50%;animation:spin .7s linear infinite}
+.toast{position:absolute;bottom:68px;left:50%;transform:translate(-50%,10px);background:#111;color:white;padding:10px 14px;border-radius:20px;font-size:10px;opacity:0;pointer-events:none;transition:.2s;white-space:nowrap;z-index:12}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:560px){body{padding:0;background:#fff}.assistant-card{width:100%;height:100svh;min-height:600px;border:0;border-radius:0;box-shadow:none;padding:14px 18px 12px}.step{max-width:420px}.destination-card img{height:100px}.hotel-hero{height:160px}}
+@media(min-width:561px) and (max-height:760px){.assistant-card{height:calc(100vh - 24px);min-height:0}.step-viewport{overflow-y:auto}}
